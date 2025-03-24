@@ -5,8 +5,8 @@
 / Initialization
         LOAD One        / Initialize counter X to 1 (first number to add)
         STORE X         / Store initial counter value
-		INPUT           / Prompt user for input value N
-		STORE N         / Store the upper limit N
+	INPUT           / Prompt user for input value N
+	STORE N         / Store the upper limit N
 		
 / Main loop: Repeatedly adds X to Sum while counting up to N
 Loop,   LOAD N          / Prepare to check loop condition
@@ -29,14 +29,14 @@ Loop,   LOAD N          / Prepare to check loop condition
 
 / Final calculation and output
 EndLoop, SKIPCOND 400   / Verify AC=0 (safety check)
-		 CLEAR          / Just skipped
-		 LOAD Sum       / Load accumulated sum (1+2+...+(X-1))
-		 ADD X          / Add final X value (N+1) to complete sum
-		 OUTPUT         / Display final result (1+2+...+N)
-		 HALT           / Terminate program
+	 CLEAR          / Just skipped
+	 LOAD Sum       / Load accumulated sum (1+2+...+(X-1))
+	 ADD X          / Add final X value (N+1) to complete sum
+	 OUTPUT         / Display final result (1+2+...+N)
+	 HALT           / Terminate program
 
 / Data memory definitions
-X,  	 DEC 0  		/ Counter variable (current number being added)
-One, 	 DEC 1  		/ Constant value 1 (for increment operations)
-Sum,     DEC 0 			/ Accumulator for the running sum
-N,       DEC 0			/ User-provided upper limit (N)
+X,  	 DEC 0  	/ Counter variable (current number being added)
+One, 	 DEC 1  	/ Constant value 1 (for increment operations)
+Sum,     DEC 0 		/ Accumulator for the running sum
+N,       DEC 0		/ User-provided upper limit (N)
