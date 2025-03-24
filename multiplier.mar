@@ -1,0 +1,33 @@
+/ MARIE Program: Single-Digit Multiplier (A × B)
+/ Algorithm: Repeated Addition (B added A times)
+/ Example: 3 × 4 = 4 + 4 + 4 = 12
+/ Note: Works for single-digit inputs (0-9)
+
+/ Input Phase
+         INPUT           / Read first digit (A) from user
+         STORE A         / Store multiplicand (how many times to add B)
+         INPUT           / Read second digit (B) from user
+         STORE B         / Store multiplier (number being repeatedly added)
+
+/ Multiplication Loop
+Loop,    LOAD Sum        / Begin multiplication: load running total
+         ADD B           / Add multiplier B to sum
+         STORE Sum       / Store updated sum (B + B + ... + B)
+
+/ Loop Control
+         LOAD A          / Prepare to check remaining additions
+         SUBT One        / Decrement addition counter (A = A - 1)
+         STORE A         / Update counter
+         SKIPCOND 400    / If A == 0, multiplication is complete
+         JUMP Loop       / Otherwise repeat addition
+
+/ Result Output
+Endloop, LOAD Sum        / Prepare final product
+         OUTPUT          / Display result (A × B)
+         HALT            / Terminate program
+
+/ Data Section
+A,       DEC 0           / Multiplicand (counter for additions)
+B,       DEC 0           / Multiplier (value being added)
+Sum,     DEC 0           / Product accumulator (initialized to 0)
+One,     DEC 1           / Constant for decrement operation
