@@ -46,7 +46,7 @@ Subtract,   HEX 0           / Return address storage
 
 / Addition subroutine 
 / Computes: X = Original_Input + 10
-Addition,   HEX 0      		/ Return address storage
+Addition,   HEX 0      	    / Return address storage
             LOAD X          / Get current value
             ADD Ten         / Add 10 (X + 10)
             STORE X         / Store result back in X
