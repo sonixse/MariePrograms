@@ -1,0 +1,54 @@
+/ MARIE PROGRAM: Boundary Calculator with Subroutines
+/ Calculates and displays both lower and upper bounds for input X (integer number):
+/   Lower Bound: X - 10
+/   Upper Bound: X + 10
+/ Example: Input X=7 -> Outputs -3 (7-10) and 17 (7+10)
+
+MAIN,       INPUT           / Read user input (X) from keyboard
+            STORE X         / Store in X (primary storage)
+            STORE A         / Backup copy in A (preserve original)
+
+            LOAD Ten        / Load constant value 10
+            STORE Y         / Store in Y for subroutines
+
+            / Calculate Lower Bound (X - 10)
+            JNS Subtract    / Call subtraction subroutine
+            LOAD X          / Load subtraction result
+            OUTPUT          / Display (X - 10)
+
+            / Restore Original Input
+            CLEAR           / Clear accumulator (optional safety)
+            LOAD A          / Reload original input value
+            STORE X         / Restore X for addition
+
+            / Calculate Upper Bound (X + 10)
+            JNS Addition    / Call addition subroutine
+            LOAD X          / Load addition result
+            OUTPUT          / Display (X + 10)
+
+            HALT            / Terminate the program
+
+/ Data section 
+X,          DEC 0           / Main input variable (modified during execution)
+A,          DEC 0           / Protected copy of original input
+Y,          DEC 0           / Temporary calculation storage
+Ten,        DEC 10          / Fixed boundary offset constant
+
+/ SUBROUTINES
+
+/ Subtract subroutine
+/ Computes: X = Original_Input - 10
+Subtract,   HEX 0           / Return address storage
+            LOAD X          / Get current value
+            SUBT Ten        / Subtract 10 (X - 10)
+            STORE X         / Store result back in X
+            JUMPI Subtract  / Return to caller (uses stored address)
+
+/ Addition subroutine 
+/ Computes: X = Original_Input + 10
+Addition,   HEX 0      		/ Return address storage
+            LOAD X          / Get current value
+            ADD Ten         / Add 10 (X + 10)
+            STORE X         / Store result back in X
+            JUMPI Addition  / Return to caller (uses stored address)
+            END
