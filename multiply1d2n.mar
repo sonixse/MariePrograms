@@ -1,0 +1,28 @@
+// MARIE Program: Multiplication of Two Single-Digit Numbers
+// Input: Two single-digit numbers (A and B)
+// Output: A * B (calculated via repeated addition)
+
+        INPUT           // Get first number (A)
+        STORE A         // Store in A
+        INPUT           // Get second number (B)
+        STORE B         // Store in B
+
+Loop,   LOAD Sum        // Load current sum
+        ADD B           // Add B to sum (A times)
+        STORE Sum       // Update sum (Sum = Sum + B)
+        LOAD A          // Load counter (A)
+        SUBT One        // Decrement A by 1
+        STORE A         // Update counter
+        SKIPCOND 400    // Skip next if A == 0 (done)
+        JUMP Loop       // Repeat until A reaches 0
+        JUMP Endloop    // Exit loop (redundant, can remove)
+
+Endloop, LOAD Sum       // Load final result
+        OUTPUT          // Print product (A * B)
+        HALT            // Stop program
+
+// Data Section
+A,      DEC 0           // Multiplicand (counter)
+B,      DEC 0           // Multiplier (added repeatedly)
+Sum,    DEC 0           // Result storage (initialized to 0)
+One,    DEC 1           // Constant for decrementing
