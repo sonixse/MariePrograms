@@ -1,0 +1,42 @@
+/ MARIE Program: Sum of Integers from 1 to N (User Input)
+/ Implements the formula: Sum = 1 + 2 + 3 + ... + N
+/ Example: For input N=10, outputs dec 55 (hex 0x37 = 3*16^1 + 7*16^0 = 48+7=55)
+
+/ Initialization
+        LOAD One        / Initialize counter X to 1 (first number to add)
+        STORE X         / Store initial counter value
+		INPUT           / Prompt user for input value N
+		STORE N         / Store the upper limit N
+		
+/ Main loop: Repeatedly adds X to Sum while counting up to N
+Loop,   LOAD N          / Prepare to check loop condition
+        SUBT One        / Decrement N (acts as loop counter)
+        STORE N         / Update remaining iterations
+        SKIPCOND 800   	/ If N > 0, continue looping (checks AC>0)
+        JUMP EndLoop    / Otherwise exit loop when N reaches 0
+
+/ Summation logic
+        LOAD Sum        / Load current sum value
+        ADD X           / Add current counter value X
+        STORE Sum       / Store updated sum (1, then 3, 6, 10,...)
+
+/ Counter increment
+        LOAD X          / Prepare to increment counter
+        ADD One         / X = X + 1 (next number to add)
+        STORE X         / Update counter (2, 3, 4,... up to N+1)
+
+        JUMP Loop       / Repeat the summation process
+
+/ Final calculation and output
+EndLoop, SKIPCOND 400   / Verify AC=0 (safety check)
+		 CLEAR          / Just skipped
+		 LOAD Sum       / Load accumulated sum (1+2+...+(X-1))
+		 ADD X          / Add final X value (N+1) to complete sum
+		 OUTPUT         / Display final result (1+2+...+N)
+		 HALT           / Terminate program
+
+/ Data memory definitions
+X,  	 DEC 0  		/ Counter variable (current number being added)
+One, 	 DEC 1  		/ Constant value 1 (for increment operations)
+Sum,     DEC 0 			/ Accumulator for the running sum
+N,       DEC 0			/ User-provided upper limit (N)
